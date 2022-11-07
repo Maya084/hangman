@@ -4,15 +4,19 @@
   line-height: 24px;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  --outline-width: 9px;
+  --head-size: 50px;
+  --person-color: #0e0e0e;
+  --top-person: 15px;
+  --body-height: 150px;
+  --leg-length: 100px;
+  --arm-length: 100px;
 }
 
 body {

@@ -1,10 +1,13 @@
 <script lang="ts">
     import { bodyParts } from "./conts";
+
+    export let showTheseParts = [1, 2, 3];
+    $: shownBodyParts = bodyParts.filter((el)=>showTheseParts.includes(el.order));
 </script>
 
 <main>
     <div class="person-body">
-        {#each bodyParts as bodyPart}
+        {#each shownBodyParts as bodyPart}
             <div class="person {bodyPart.name}" hidden={bodyPart.hidden} />
         {/each}
     </div>

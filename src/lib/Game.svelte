@@ -1,5 +1,11 @@
 <script lang="ts">
+    import { ShowPartsStore } from "./hangman-store";
+
+
     let word = "MAJA";
+    let guessed = "";
+    let wrong = "";
+
     $: options = {
         A: false, //guessed
         B: false,
@@ -30,9 +36,19 @@
     };
 
     function guessLetter(letter: string) {
+        if (guessed.indexOf(letter) >= 0) {
+            return;
+        }
         options[letter] = true;
-        console.log(options);
-        
+        guessed += letter;
+        if(word.indexOf(letter)>=0){
+            return
+        }
+
+        wrong += letter;
+        ShowPartsStore.update((currentList) => {
+            return [...currentList, wrong.length];
+        })
     }
 </script>
 
@@ -59,12 +75,14 @@
         display: flex;
         flex-wrap: wrap;
         gap: 1em;
+        padding: 1em;
     }
 
     .guess-letter {
         all: unset;
         width: 50px;
         height: 50px;
+        border-radius: 5px;
         background-color: #d4b2b2;
 
         display: flex;
@@ -79,6 +97,6 @@
 
     .guess-letter:disabled {
         background-color: #685868;
-        cursor: default
+        cursor: default;
     }
 </style>

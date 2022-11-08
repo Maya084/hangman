@@ -4,7 +4,7 @@
 </script>
 
 <main>
-  <Game></Game>
+  <Game/>
   <Hangman/>
 </main>
 

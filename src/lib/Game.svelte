@@ -1,6 +1,6 @@
 <script lang="ts">
+    import { onMount } from "svelte";
     import { ShowPartsStore } from "./hangman-store";
-
 
     let word = "MAJA";
     let guessed = "";
@@ -41,21 +41,37 @@
         }
         options[letter] = true;
         guessed += letter;
-        if(word.indexOf(letter)>=0){
-            return
+        if (word.indexOf(letter) >= 0) {
+            return;
         }
 
         wrong += letter;
         ShowPartsStore.update((currentList) => {
             return [...currentList, wrong.length];
-        })
+        });
     }
+
+    function reset() {
+        Object.keys(options).forEach((letter) => {
+            options[letter] = false;
+        });
+        guessed = "";
+        wrong = "";
+    }
+
+    onMount(() => {
+        reset();
+    });
 </script>
 
 <main>
     <div class="word-container">
         {#each word.split("") as letter}
-            <div class="letter">{letter}</div>
+            <div class="letter">
+                <span hidden={!guessed.includes(letter)}>
+                    {letter}
+                </span>
+            </div>
         {/each}
     </div>
 
@@ -71,6 +87,22 @@
 </main>
 
 <style>
+    .word-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1em;
+        padding: 1em;
+    }
+
+    .letter {
+        width: 50px;
+        height: 50px;
+        border-bottom: 5px solid;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     .guess-container {
         display: flex;
         flex-wrap: wrap;

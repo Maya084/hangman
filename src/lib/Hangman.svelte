@@ -1,42 +1,11 @@
 <script lang="ts">
-    const bodyParts = [
-        {
-            order: 1,
-            name: "head",
-            hidden: false,
-        },
-        {
-            order: 2,
-            name: "body",
-            hidden: false,
-        },
-        {
-            order: 3,
-            name: "left-arm",
-            hidden: false,
-        },
-        {
-            order: 4,
-            name: "right-arm",
-            hidden: false,
-        },
-        {
-            order: 5,
-            name: "left-leg",
-            hidden: false,
-        },
-        {
-            order: 6,
-            name: "right-leg",
-            hidden: false,
-        },
-    ];
+    import { bodyParts } from "./conts";
 </script>
 
 <main>
     <div class="person-body">
         {#each bodyParts as bodyPart}
-            <div class="person {bodyPart.name}" hidden={bodyPart.hidden}/>
+            <div class="person {bodyPart.name}" hidden={bodyPart.hidden} />
         {/each}
     </div>
 </main>

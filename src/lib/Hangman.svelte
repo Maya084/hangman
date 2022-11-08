@@ -1,8 +1,10 @@
 <script lang="ts">
     import { bodyParts } from "./conts";
+    import { ShowPartsStore } from "./hangman-store";
 
-    export let showTheseParts = [1, 2, 3];
-    $: shownBodyParts = bodyParts.filter((el)=>showTheseParts.includes(el.order));
+    $: shownBodyParts = bodyParts.filter((el) =>
+        $ShowPartsStore.includes(el.order)
+    );
 </script>
 
 <main>

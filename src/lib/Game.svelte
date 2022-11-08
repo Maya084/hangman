@@ -38,7 +38,7 @@
     };
 
     function guessLetter(letter: string) {
-        //prevents playing with html disabled properties and 
+        //prevents playing with html disabled properties and
         //clicking a button that is already clicked
         if (options[letter]) {
             return;
@@ -92,7 +92,7 @@
         {#each Object.keys(options) as letter}
             <button
                 class="guess-letter"
-                on:click={guessLetter(letter)}
+                on:click={() => guessLetter(letter)}
                 disabled={options[letter]}><span>{letter}</span></button
             >
         {/each}

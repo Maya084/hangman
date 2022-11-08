@@ -2,10 +2,12 @@
     import { onMount } from "svelte";
     import { ShowPartsStore } from "./hangman-store";
 
+    //word to guess
     let word = "MAJA";
-    let guessed = "";
+    //letters that are guessed but not in the word
     let wrong = "";
 
+    //LIST OF LETTERS
     $: options = {
         A: false, //guessed
         B: false,
@@ -36,26 +38,35 @@
     };
 
     function guessLetter(letter: string) {
-        if (guessed.indexOf(letter) >= 0) {
+        //prevents playing with html disabled properties and 
+        //clicking a button that is already clicked
+        if (options[letter]) {
             return;
         }
+
+        //letter is guessed
         options[letter] = true;
-        guessed += letter;
+
+        //letter is present in the word
         if (word.indexOf(letter) >= 0) {
             return;
         }
 
+        //add the letter to the wrong pile
         wrong += letter;
+
+        //show another part of the body
         ShowPartsStore.update((currentList) => {
             return [...currentList, wrong.length];
         });
     }
 
     function reset() {
+        //set all properties to false
         Object.keys(options).forEach((letter) => {
             options[letter] = false;
         });
-        guessed = "";
+
         wrong = "";
     }
 
@@ -65,16 +76,18 @@
 </script>
 
 <main>
+    <!-- WORD TO GUESS -->
     <div class="word-container">
         {#each word.split("") as letter}
             <div class="letter">
-                <span hidden={!guessed.includes(letter)}>
+                <span hidden={!options[letter]}>
                     {letter}
                 </span>
             </div>
         {/each}
     </div>
 
+    <!-- LETTERS -->
     <div class="guess-container">
         {#each Object.keys(options) as letter}
             <button

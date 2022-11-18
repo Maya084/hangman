@@ -1,6 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { ShowPartsStore } from "./hangman-store";
+    import { Confetti } from "svelte-confetti";
 
     //word to guess
     let word = "MAJA";
@@ -97,9 +98,32 @@
             >
         {/each}
     </div>
+
+    <div class="celebration">
+        <Confetti
+            x={[-5, 5]}
+            y={[0, 0.1]}
+            delay={[500, 2000]}
+            infinite
+            duration="5000"
+            amount="200"
+            fallDistance="100vh"
+        />
+    </div>
 </main>
 
 <style>
+    .celebration {
+        position: fixed;
+        top: -50px;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
+        pointer-events: none;
+    }
     .word-container {
         display: flex;
         flex-wrap: wrap;
@@ -121,6 +145,7 @@
         flex-wrap: wrap;
         gap: 1em;
         padding: 1em;
+        width: 650px;
     }
 
     .guess-letter {
